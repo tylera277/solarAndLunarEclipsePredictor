@@ -1,6 +1,7 @@
 # solarAndLunarEclipsePredictor
 
-This is a program which I made which tries to predict when solar and lunar eclipses will happen on earth. My model predicts for 2021, ![eclipsePredictionsfor2021](https://user-images.githubusercontent.com/37377528/120106536-4fb5c880-c12b-11eb-8651-eee1b385a260.png)
+This is a program which I made which tries to predict when solar and lunar eclipses will happen on earth. My model predicts for 2021,![2021UpdatedPredictions](https://user-images.githubusercontent.com/37377528/120257038-6d834a80-c25d-11eb-89b9-f3c9041ab5ee.png)
+
 And compare this to what the actual dates are,
 ![actualEclipses2021](https://user-images.githubusercontent.com/37377528/120106565-7b38b300-c12b-11eb-8ca0-3bb82728881f.png)
 Which is highly accurate. And then to look at the specific times for, lets say, May 26, the actual times are 
