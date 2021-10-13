@@ -3,7 +3,10 @@
 This is a program which I made which tries to predict when solar and lunar eclipses will happen on earth. My model predicts for 2021,![2021UpdatedPredictions](https://user-images.githubusercontent.com/37377528/120257038-6d834a80-c25d-11eb-89b9-f3c9041ab5ee.png)
 
 And compare this to what the actual dates are,
-![actualEclipses2021](https://user-images.githubusercontent.com/37377528/120106565-7b38b300-c12b-11eb-8ca0-3bb82728881f.png)
+<p align="center">
+  <img width="600" height="200" src="https://user-images.githubusercontent.com/37377528/120106565-7b38b300-c12b-11eb-8ca0-3bb82728881f.png">
+</p>
+
 Which is highly accurate. And then to look at the specific times for, lets say, May 26, the actual times are 
 ![may26-2021EclipseTimes](https://user-images.githubusercontent.com/37377528/120106615-cb177a00-c12b-11eb-8eee-521c8a0482eb.png)
 And for June 10th,
