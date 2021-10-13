@@ -1,9 +1,7 @@
 # solarAndLunarEclipsePredictor
 
 This is a program which I made which tries to predict when solar and lunar eclipses will happen on earth. My model predicts for 2021, (in the form of year, month,day, and hour)
-<p align="center">
-  <img width="600" height="200" src="https://user-images.githubusercontent.com/37377528/120257038-6d834a80-c25d-11eb-89b9-f3c9041ab5ee.png">
-</p>
+<img width="303" alt="inputToSolver" src="https://user-images.githubusercontent.com/37377528/120257038-6d834a80-c25d-11eb-89b9-f3c9041ab5ee.png">
 
 And compare this to what the actual dates are,
 <p align="center">
