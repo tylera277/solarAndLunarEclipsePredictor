@@ -31,5 +31,14 @@ And lastly December 4th,
 
 Admittedly, not all of the years I run through my model are always this accurate. 
 
-**5/26/2021 update:** I changed the criteria to identify a solar and lunar eclipse by having four lines projecting from center of the sun to the two horizontal and two vertical edges of the moon, and then checking to see if those lines angles fell within the range of the earth's angular size. I originally had it so only a single line was going from sun to the center of moon, and this change has dramatically increased my accuracy at predicting the hours an eclipse takes place. Some of the penumbra lunar eclipses are causing some issues though.
+--I have merged the plotting functionality from one of my other respositories, the results of which can be seen below.
 
+<p align="center">
+  <img width="1007" alt="Screen Shot 2021-12-23 at 10 29 30 AM" src="https://user-images.githubusercontent.com/37377528/147261355-8d12aee0-066e-48bd-858f-adbacef21255.png">
+</p>
+
+And the actual posted below,
+<p align="center">
+  <img width="589" alt="Screen Shot 2021-12-23 at 10 32 09 AM" src="https://user-images.githubusercontent.com/37377528/147261517-5c0a698e-3a1c-4b93-b69c-96b65b6bec08.png">
+
+</p>
