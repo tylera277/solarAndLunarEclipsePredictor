@@ -33,7 +33,7 @@ def sun2Moon(julianTime):
 def leapYearAdjuster(year, month):
     if year % 4 == 0 and year % 400 == 0 and year % 100 != 0 and month == 2:
         dayUpperRange = 28
-    elif month ==2:
+    elif month == 2:
         dayUpperRange = 29
     elif month == 9 or 4 or 6 or 11:
         dayUpperRange = 30
