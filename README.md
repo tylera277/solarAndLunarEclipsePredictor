@@ -29,16 +29,16 @@ And lastly December 4th,
   <img width="600" height="200" src="https://user-images.githubusercontent.com/37377528/120106799-7de7d800-c12c-11eb-844b-fbdae84fa211.png">
 </p>
 
-Admittedly, not all of the years I run through my model are always this accurate. 
-
+The eclipses that are near the poles are 
 --I have merged the plotting functionality from one of my other respositories, the results of which can be seen below.
 
 <p align="center">
-  <img width="1007" alt="Screen Shot 2021-12-23 at 10 29 30 AM" src="https://user-images.githubusercontent.com/37377528/147261355-8d12aee0-066e-48bd-858f-adbacef21255.png">
+ <img width="996" alt="Screen Shot 2021-12-26 at 12 59 22 PM" src="https://user-images.githubusercontent.com/37377528/147416388-9ece280e-baa5-4621-a7b0-92c6137d050a.png">
+
 </p>
 
 And the actual posted below,
 <p align="center">
   <img width="589" alt="Screen Shot 2021-12-23 at 10 32 09 AM" src="https://user-images.githubusercontent.com/37377528/147261517-5c0a698e-3a1c-4b93-b69c-96b65b6bec08.png">
-
 </p>
+
