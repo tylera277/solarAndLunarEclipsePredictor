@@ -54,11 +54,14 @@ class EclipsePlotter:
 
 
 
-                    if ((abs(sunAlt - moonAlt) < 0.0005) and ((abs(sunAz - moonAz) < 0.0005))):
+                    if ((abs(sunAlt - moonAlt) < 0.0001) and ((abs(sunAz - moonAz) < 0.0001))):
 
                         # Gets rid of those points that were crossing through the earth.
-                        if(sunAlt and moonAlt) > 0:
+                        # Positive altitude is above the viewable horizon
+                        if(sunAlt and moonAlt) >= 0:
 
+
+                            #print('car')
                             solarEclipseLat.append(lat1)
                             solarEclipseLon.append(lon1)
 
@@ -82,5 +85,5 @@ class EclipsePlotter:
 
 
         fig = px.scatter_geo(df, lat='lat', lon='lon')
-        fig.update_layout(title='5/29/1919 Solar Eclipse Path', title_x=0.5)
+        #fig.update_layout(title='5/29/1919 Solar Eclipse Path', title_x=0.5)
         fig.show()
