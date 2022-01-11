@@ -120,19 +120,6 @@ class MyWindow:
         pass
 
 
-    def add(self):
-        self.t3.delete(0, 'end')
-        num1=int(self.t1.get())
-        num2=int(self.t2.get())
-        result=num1+num2
-        self.t3.insert(END, str(result))
-    def sub(self):
-        self.t3.delete(0, 'end')
-        num1=int(self.t1.get())
-        num2=int(self.t2.get())
-        result=num1-num2
-        self.t3.insert(END, str(result))
-
 window=Tk()
 mywin=MyWindow(window)
 window.title('Eclipse Calculator')
