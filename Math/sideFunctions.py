@@ -1,6 +1,8 @@
 import datetime
 import math
 
+import numpy as np
+import mpmath as mp
 import pandas as pd
 from jplephem.spk import SPK
 
@@ -8,7 +10,7 @@ def time2Julian(year1, month1, day1, hour1, minute1):
 
     # Create the Timestamp object
     ts = pd.Timestamp(year=year1, month=month1, day=day1,
-                  hour=hour1, minute=minute1, second=00, tz='US/Eastern')
+                  hour=hour1, minute=minute1, second=00, tz='Etc/GMT')
 
     # Print the Timestamp object
     return ts.to_julian_date()
@@ -39,6 +41,10 @@ def leapYearAdjuster(year, month):
         dayUpperRange = 30
 
     return dayUpperRange
+
+
+def r(degrees):
+    return np.longdouble(np.radians(degrees))
 
 
 
