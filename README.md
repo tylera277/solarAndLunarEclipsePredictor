@@ -3,7 +3,7 @@
 
 
 This is a program which I made which predicts when solar and lunar eclipses will take place, as well as plotting the trajectory of solar eclipse's path across the surface of the Earth. 
--TO DOWNLOAD: Refer to the release side tab where I have given instructions on how to run this program yourself.
+- TO DOWNLOAD: Refer to the release side tab where I have given instructions on how to run this program yourself.
 - The simple GUI I made is attached below.
 <p align="center">
 <img width="786" alt="gui_picture" src="https://user-images.githubusercontent.com/37377528/149196233-6633f88e-d3f4-4791-8db6-c72f4323614d.png">
