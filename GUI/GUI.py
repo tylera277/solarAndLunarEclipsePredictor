@@ -2,15 +2,18 @@ from tkinter import *
 from tkinter import messagebox
 
 
-import os
+import logging
 from os import system as sys
 from SolarEclipseCalculator import SolarEclipseCalculator
 from LunarEclipseCalculator import LunarEclipseCalculator
 from eclipsePlotter import EclipsePlotter
 from PIL import ImageTk, Image
 
+
 import traceback
 import numpy as np
+
+logger = logging.getLogger()
 
 class MyWindow:
 
@@ -46,11 +49,11 @@ class MyWindow:
         self.lbl_timestep.place(x=60, y=300)
         self.timestep_entry = Entry(win)
         self.timestep_entry.place(x=130, y=300)
+
         self.lbl_timestep_notice = Label(win, text='(Suggested Time Step is 60)')
         self.lbl_timestep_notice.place(x=60, y=330)
 
-        self.b7 = Button(win, text='Calculate', command=lambda: [self.check_values(),
-                                                                 self.show_eclipse_times()])
+        self.b7 = Button(win, text='Calculate', command=lambda: [self.show_eclipse_times()])
         self.b7.place(x=80, y=380)
 
         self.reset_button = Button(win, text='Reset', command=lambda: self.reset())
@@ -65,27 +68,42 @@ class MyWindow:
         self.plot_image = Label(win)
         self.plot_image.place(x=350, y=200)
 
-        #self.output = Text(win, height=10, width=30)
-        #self.output.place(x=400, y=10)
+        # Used for console testing
+        # self.output = Text(win, height=10, width=30)
+        # self.output.place(x=400, y=10)
+
+    def validate_entry(entry):
+        if entry == "": return True
+        try:
+            value = int(entry)
+        except ValueError:  # oops, couldn't convert to int
+            return False
+        return 0 <= value <= 100
 
     def check_values(self):
+
+        year = self.year_entry.get()
+        month = self.month_entry.get()
+        timestep = self.timestep_entry.get()
+
         try:
-            year1 = int(self.year_entry.get())
-            month1 = int(self.month_entry.get())
-            timestep1 = int(self.timestep_entry.get())
+            year = int(year)
+            month = int(month)
+            timestep = int(timestep)
         except ValueError:
-            messagebox.showerror("Error", "Didnt enter a number")
+            messagebox.showerror("Error", "Input must be an integer.")
 
-
-        if month1<1 or month1>12:
-            if month1 != 13:
+        if month < 1 or month > 12:
+            if month != 13:
                 messagebox.showerror("Error", "Months must be between 1 and 12, or 13")
-        if timestep1>60 or timestep1<1:
+                self.reset()
+
+        if timestep > 60 or timestep < 1:
             messagebox.showerror("Error", "Time Step must be between 1 and 60")
             self.reset()
-        if year1<1550 or year1>2650:
+        if year < 1550 or year > 2650:
             messagebox.showerror("Error", "Year must be between 1550 and 2650")
-            self.reset()
+
 
 
 
@@ -96,6 +114,8 @@ class MyWindow:
         will happen.
         """
         global months, year
+
+        self.check_values()
 
         eclipse_check = int(self.Var1.get())
         if eclipse_check == 0:
@@ -125,7 +145,8 @@ class MyWindow:
                 else:
                     pass
             if counter == 0:
-                self.output.insert(END, '{}\n'.format("None Found for that month/year!"))
+                pass
+                #self.output.insert(END, '{}\n'.format("None Found for that month/year!"))
 
         # Lunar Eclipse only calculator
         elif solar_eclipse_check == 0 and lunar_eclipse_check == 1:
@@ -140,7 +161,8 @@ class MyWindow:
                 else:
                     pass
             if counter == 0:
-                self.output.insert(END, '{}\n'.format("None Found for that month/year!"))
+                pass
+                #self.output.insert(END, '{}\n'.format("None Found for that month/year!"))
 
     def reset(self):
         """ Clears the entry fields."""

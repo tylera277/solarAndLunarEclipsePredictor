@@ -1,4 +1,6 @@
 
+from IPython.display import Image
+
 class EclipsePlotter:
 
     def __init__(self, solarEclipseDates, month):
@@ -30,14 +32,12 @@ class EclipsePlotter:
             moon = ephem.Moon()
             sun = ephem.Sun()
             obsPosition = ephem.Observer()
-            time = pd.to_datetime(self.solarEclipseDates[self.month][i], unit='D', origin='julian')
+            #time = pd.to_datetime(self.solarEclipseDates[self.month][i], unit='D', origin='julian')
+            time = self.solarEclipseDates[self.month][i]
 
 
             for lat1 in range(-90, 90, 1):
                 for lon1 in range(-180, 180, 1):
-
-
-
 
                     obsPosition.lat = "{}".format(lat1)
                     obsPosition.long = "{}".format(lon1)
@@ -46,22 +46,19 @@ class EclipsePlotter:
                     sun.compute(obsPosition)
                     moon.compute(obsPosition)
 
-                    moonAz = moon.az + 0.0
-                    moonAlt = moon.alt + 0.0
+                    moonAz = float(moon.az)
+                    moonAlt = float(moon.alt)
 
-                    sunAz = sun.az + 0.0
-                    sunAlt = sun.alt + 0.0
+                    sunAz = float(sun.az)
+                    sunAlt = float(sun.alt)
 
-
-
-                    if ((abs(sunAlt - moonAlt) < 0.0001) and ((abs(sunAz - moonAz) < 0.0001))):
+                    if ((abs(sunAlt - moonAlt) < 0.0005) and ((abs(sunAz - moonAz) < 0.0005))):
+                    #if((abs(sunAlt - moonAlt) < 0.003) and ((abs(sunAz - moonAz) < 0.003))):
 
                         # Gets rid of those points that were crossing through the earth.
                         # Positive altitude is above the viewable horizon
-                        if(sunAlt and moonAlt) >= 0:
-
-
-                            #print('car')
+                        if (sunAlt and moonAlt) >= 0:
+                            # print('car')
                             solarEclipseLat.append(lat1)
                             solarEclipseLon.append(lon1)
 
@@ -79,11 +76,16 @@ class EclipsePlotter:
 
 
         df = pd.DataFrame(lat)
-        print(df)
         df.columns = ['lat']
         df['lon'] = lon
+        df['color_column'] = pd.Series([1 for x in range(len(df))])
 
 
-        fig = px.scatter_geo(df, lat='lat', lon='lon')
+
+
+        fig = px.scatter_geo(df, lat='lat', lon='lon', color='color_column')
+        fig = fig.update(layout_coloraxis_showscale=False)
+        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
+        fig.write_image('generated_plot.png')
         #fig.update_layout(title='5/29/1919 Solar Eclipse Path', title_x=0.5)
-        fig.show()
+        #fig.show()

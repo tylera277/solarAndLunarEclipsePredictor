@@ -1,7 +1,6 @@
 import numpy as np
 import math
 
-import mpmath as mp
 
 from sideFunctions import time2Julian, earth2Sun, sun2Moon
 from sideFunctions import leapYearAdjuster, r
@@ -24,7 +23,9 @@ class SolarEclipseCalculator:
         """
         Allows one to either run a single month or the whole year
         """
-        if self.month == 'ALL':
+        print("check:", self.month)
+        #if self.month == 'ALL':
+        if self.month == 13:
             lowerMonthLimit = 1
             upperMonthLimit = 13
         else:
@@ -35,14 +36,13 @@ class SolarEclipseCalculator:
 
     def DetermineTimes(self):
 
-        mp.dps = 25
         months_storage = []
         lowerMonthLimit, upperMonthLimit = self.MonthLimits()
 
         # this gets the position vectors of the stellar bodies that we are using
         from jplephem.spk import SPK
 
-        possibleSolarEclipseDates = np.zeros((13, 1000))
+        possibleSolarEclipseDates = np.zeros((13, 1000), dtype='object')
 
         # + These for loops check each date to see whether it meets the criteria below,
         #   basically that the moons shadow hits somewhere within the cross-section of the earth.
@@ -55,7 +55,6 @@ class SolarEclipseCalculator:
                 dayUpperRange = leapYearAdjuster(TestYear, TestMonth)
 
                 for TestDay in range(1, dayUpperRange, 1):
-                #for TestDay in range(14, 15, 1):
                     for TestHour in range(1, 24, 1):
                         for TestMinute in range(1, 60, self.minuteSteps):
 
@@ -145,20 +144,30 @@ class SolarEclipseCalculator:
                             sun2moon_point_T2T = math.atan(r((moon_z_pointT - sun_z_pointT) / (moon_cent)))
                             sun2earth_point_T2T = math.atan(r((earth_z_pointT - sun_z_pointT) / (earth_cent)))
 
-                            # X & Y alignment checker
-                            #print('car:',TestHour, sun2moon_point1_1, sun2earth_point1_2-sun2moon_point1_1)
-                            if ((sun2earth_point1_1<=sun2moon_point1_1) and (sun2moon_point1_1<=sun2earth_point1_2)) or \
-                                ((sun2earth_point1_1>=sun2moon_point1_1) and (sun2moon_point1_1>=sun2earth_point1_2)):
+                            # X & Y alignment checker (top view of system)
+                            xy_cond1 = (sun2earth_point1_1 <= sun2moon_point1_1) and \
+                                       (sun2moon_point1_1 <= sun2earth_point1_2)
 
+                            xy_cond2 = (sun2earth_point1_1 >= sun2moon_point1_1) and \
+                                       (sun2moon_point1_1 >= sun2earth_point1_2)
+
+                            if any([xy_cond1, xy_cond2]):
+
+                                    z_cond1 = (sun2moon_point_B2B <= sun2earth_point_B2B) and \
+                                              (sun2moon_point_T2T >= sun2earth_point_T2T)
+
+                                    z_cond2 = (sun2moon_point_B2B >= sun2earth_point_B2B) and \
+                                              (sun2moon_point_T2T <= sun2earth_point_T2T)
                                     # Z-axis alignment checker
-                                    if ((sun2moon_point_B2B <= sun2earth_point_B2B) and (sun2moon_point_T2T >= sun2earth_point_T2T)) \
-                                            or \
-                                            ((sun2moon_point_B2B >= sun2earth_point_B2B) and (sun2moon_point_T2T <= sun2earth_point_T2T)):
+                                    if any([z_cond1, z_cond2]):
 
                                         # Selecting only solar eclipses; where moon is closer to sun than earth
                                         if moon_cent < earth_cent:
-                                            print(TestYear, TestMonth, TestDay, TestHour, TestMinute)
-                                            possibleSolarEclipseDates[TestMonth][counter] = (julianTime)
+                                            print(TestYear, TestMonth, TestDay, TestHour)
+                                            possibleSolarEclipseDates[TestMonth][counter] = \
+                                            "{}-{}-{} {}:{}:00".format(TestYear,TestMonth,TestDay,TestHour,TestMinute)
+
+
                                             if TestMonth in months_storage:
                                                 pass
                                             else:
@@ -166,3 +175,4 @@ class SolarEclipseCalculator:
                                             counter += 1
 
         return possibleSolarEclipseDates, months_storage
+
